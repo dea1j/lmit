@@ -1,0 +1,43 @@
+.questionContainer {
+  white-space: normal;
+
+  height: 100%;
+  width: 100%;
+}
+.optionContainer {
+  margin-top: 12px;
+  flex-grow: 1;
+}
+.option {
+  padding: 9px 18px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  background-color: #dddddd;
+  color: rgba(0, 0, 0, 0.85);
+  border: transparent 1px solid;
+}
+.option:active {
+  transform: scaleX(0.9);
+}
+.is-selected {
+  border-color: rgba(black, 0.25);
+  background-color: white;
+  border: 1px solid #8e8ed7;
+}
+.is-selected:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.pagination {
+  justify-content: space-between;
+}
+.questions {
+  padding: 0 30px;
+}
+.icon {
+  color: #ff5252;
+  font-size: 5rem;
+}
+.icon .success {
+  color: #00e676;
+  font-size: 5rem;
+}

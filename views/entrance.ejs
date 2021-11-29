@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="./entrance.css">
+    <!--Font Awesome-->
+    <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet" />
+
+    <!---->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://kit.fontawesome.com/a26d0abb0a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <!-- Step 1 -->
+            <div v-if="step == '1'" class="step step1">
+                <div class="logo d-flex mt-3">
+                    <img src="../img/logoMain.png" alt="logo" />
+                </div>
+                <form>
+                    <div class="mb-3">
+                        <h3 class="text-center mb-5">LMIT Entrance Examination (Y22A)</h3>
+                        <p>Welcome, Olamigoke Philip A.,</p>
+                        <p class="pr-font"><b>Subject:</b> Basic Arithmetic & Logical Reasoning</p>
+                        <p class="pr-font"><b>Total:</b> 20 Questions</p>
+                    </div>
+                    <div class="d-flex flex-row w-100">
+                        <button type="button" v-on:click="startTest()" class="w-100 btn-action btn-get-started">Start
+                            Test</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Step 2 -->
+            <div v-else-if="step == '2'" class="step">
+                <div class="logo d-flex mt-3">
+                    <img src="../img/logoMain.png" alt="logo" />
+                </div>
+
+                <div class="questionContainer" v-if="quiz.questions.length > questionIndex" v-bind:key="questionIndex">
+                    <div class="questions">
+                        <header>
+                            <h1 class="title is-6">Entrance Test</h1>
+                            <div class="progressContainer">
+                                <p>Question {{(questionIndex)}} of 20</p>
+                            </div>
+                        </header>
+                        <!-- questionTitle -->
+                        <h2 class="titleContainer title">{{ quiz.questions[questionIndex].text }}</h2>
+
+                        <!-- quizOptions -->
+                        <div class="optionContainer">
+                            <div class="option" v-for="(response, index) in quiz.questions[questionIndex].responses"
+                                @click="selectOption(index)"
+                                :class="{ 'is-selected': userResponses[questionIndex] == index}" :key="index">
+                                {{ response.text }}
+                            </div>
+
+                        </div>
+                        <footer class="questionFooter">
+                            <nav class="pagination" role="navigation" aria-label="pagination">
+                                <button class="btn-action btn-get-started" v-on:click="prev()" v-if="questionIndex > 0">
+                                    Back
+                                </button>
+                                <button class="btn-action btn-get-started"
+                                    :class="(userResponses[questionIndex]==null)?'':'is-active'" v-on:click="next();"
+                                    :disabled="questionIndex >= quiz.questions.length">Next
+                                </button>
+                            </nav>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div v-if="questionIndex >= quiz.questions.length" class="step step3 pr-font">
+                <h2 class="title">
+                    Result
+                </h2>
+                <span class="icon">
+                    <i class="fa" :class="score()>=6?'fa-check-circle-o success':'fa-times-circle'"></i>
+                </span>
+                <p>You scored {{ (score() / 10) * 100 }}%</p>
+                {{ score() >= 6 ? "Congratulations, you pass the exam. Result has been sent to your email" : "Sorry, you
+                did not meet up to the required score"}}
+                <br>
+
+                <button class="btn-action btn-get-started" @click="restart()">Back to Home</button>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://kit.fontawesome.com/c8c9028de4.js" crossorigin="anonymous"></script>
+    <script src="./entrance.js"></script>
+</body>
+
+</html>
