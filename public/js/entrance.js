@@ -1,29 +1,3 @@
-// const sgMail = require('@sendgrid/mail')
-// // const link = `localhost:8000/testLink/`;
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-// const msg = {
-//   to: 'test@example.com',
-//   from: 'jdayo2017@gmail.com',
-//   subject: 'LMIT Application',
-//   text: `Dear, fullName, Your application Number is: applicationNo. CLick the link to take test link`,
-// }
-// sgMail
-//   .send(msg)
-//   .then(() => {
-//     console.log('Email sent')
-//   })
-//   .catch((error) => {
-//     console.error(error)
-//   })
-
-const handleContinue = () => {
-  let url_string = window.location.href;
-  let url = new URL(url_string);
-  let fullname = url.searchParams.get("fullName");
-  let applicationNo = url.searchParams.get("applicationNo");
-  window.location = `/entranceExam?fullname=${fullname}&applicationNo=${applicationNo}`
-}
-
 let quiz = {
   questions: [
     {
@@ -129,10 +103,14 @@ let quiz = {
   ]
 }
 
+const handleContinue = () => {
+  let url_string = window.location.href;
+  let url = new URL(url_string);
+  let fullname = url.searchParams.get("fullName");
+  let applicationNo = url.searchParams.get("applicationNo");
+  window.location = `/entranceExam?fullname=${fullname}&applicationNo=${applicationNo}`
+}
 
-// const handleEntranceExam = () => {
-//     alert('Hey')
-// }
 
 var app = new Vue({
   data: {
@@ -173,3 +151,22 @@ var app = new Vue({
     }
   }
 }).$mount("#app");
+
+
+// const sgMail = require('@sendgrid/mail')
+// // const link = `localhost:8000/testLink/`;
+// sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+// const msg = {
+//   to: 'test@example.com',
+//   from: 'jdayo2017@gmail.com',
+//   subject: 'LMIT Application',
+//   text: `Dear, fullName, Your application Number is: applicationNo. CLick the link to take test link`,
+// }
+// sgMail
+//   .send(msg)
+//   .then(() => {
+//     console.log('Email sent')
+//   })
+//   .catch((error) => {
+//     console.error(error)
+//   })

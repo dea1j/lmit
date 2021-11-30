@@ -2,11 +2,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
-const short = require('short-uuid');
 const bodyParser = require('body-parser')
 require("dotenv").config();
 
-const testRoutes = require('./routes/testRoute');
+// const testRoutes = require('./routes/testRoute');
 const Student = require('./models/Student')
 
 app.set('view engine', 'ejs');
@@ -34,31 +33,29 @@ const startServer = async () => {
     app.get('/mailresponse', function(req, res){ 
         res.render('sentMail');
     });
-
-    app.get('/entranceExam', urlencodedParser, async(req, res) => {
-        res.render('entrance');
-    });
-
+    
     app.get('/proceed', function(req, res){
         const fullName = req.query.fullName
         const applicationNo = req.query.applicationNo
-
         res.render('step3',{fullName:fullName, applicationNo: applicationNo});
     });
-
-
+    
+    
     app.post("/registerStudent", urlencodedParser, async(req, res) => {
         const data = req.body;
-
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        
         const student = new Student({
             fullName: data.fullName,
             email: data.email,
             phone: data.phone,
             gender: data.gender,
             qualification: data.qualification,
-            applicationNo: short.generate()
+            applicationNo: `Y22A${getRandomInt(500)}`
         });
-
+        
         try {
             const savedStudent = await student.save()
             res.status(201)
@@ -68,8 +65,12 @@ const startServer = async () => {
             res.status(500).send(error);
         }
     });
+    
+    app.get('/entranceExam', async(req, res) => {
+        res.render('entrance');
+    });
 
-    app.use('/test', testRoutes)
+    // app.use('/test', testRoutes)
 
     // Set Public Folder
     app.use("/css",  express.static(path.join(__dirname, 'public', 'css')));
