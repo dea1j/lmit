@@ -108,7 +108,8 @@ const handleContinue = () => {
   let url = new URL(url_string);
   let fullname = url.searchParams.get("fullName");
   let applicationNo = url.searchParams.get("applicationNo");
-  window.location = `/entranceExam?fullname=${fullname}&applicationNo=${applicationNo}`
+  let email = url.searchParams.get("email");
+  window.location = `/entranceExam?fullname=${fullname}&email=${email}&applicationNo=${applicationNo}`
 }
 
 
@@ -149,13 +150,7 @@ var app = new Vue({
       }
       console.log(score)
       return score;
-    },
-    // handleContinue: function() {
-    //   let url_string = window.location.href;
-    //   let url = new URL(url_string);
-    //   let fullname = url.searchParams.get("fullName");
-    //   let applicationNo = url.searchParams.get("applicationNo");
-    // }
+    }
   }
 }).$mount("#app");
 

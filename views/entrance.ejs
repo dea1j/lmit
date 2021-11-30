@@ -12,6 +12,7 @@
     <!-- <link rel="stylesheet" href="./css/entrance.css" /> -->
     <!--Font Awesome-->
     <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/a26d0abb0a.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -86,9 +87,9 @@
                     <i class="fa" :class="score()>=6?'fa-check-circle-o success':'fa-times-circle'"></i>
                 </span>
                 <p>You scored {{ (score() / 10) * 100 }}%</p>
-                <!-- <p>
-                {{ score() >= 6 ? "Congratulations, you pass the exam. Result has been sent to your email" : "Sorry, you
-                did not meet up to the required score"}}</p> -->
+                <p>
+                    {{ score() >= 6 ? "Congratulations, you pass the exam. Result has been sent to your email" : "Sorry did not meet up to the required score" }}
+                </p>
                 <br>
 
                 <button class="btn-action btn-get-started" @click="restart()">Back to Home</button>

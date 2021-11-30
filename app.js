@@ -59,7 +59,7 @@ const startServer = async () => {
         try {
             const savedStudent = await student.save()
             res.status(201)
-            .redirect(`/proceed?fullName=${savedStudent.fullName}&applicationNo=${savedStudent.applicationNo}`)
+            .redirect(`/proceed?fullName=${savedStudent.fullName}&email=${savedStudent.email}&applicationNo=${savedStudent.applicationNo}`)
         } catch (error) {
             console.log(error)
             res.status(500).send(error);
