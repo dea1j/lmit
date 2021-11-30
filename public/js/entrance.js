@@ -147,8 +147,15 @@ var app = new Vue({
             score = score + 1;
         }
       }
+      console.log(score)
       return score;
-    }
+    },
+    // handleContinue: function() {
+    //   let url_string = window.location.href;
+    //   let url = new URL(url_string);
+    //   let fullname = url.searchParams.get("fullName");
+    //   let applicationNo = url.searchParams.get("applicationNo");
+    // }
   }
 }).$mount("#app");
 

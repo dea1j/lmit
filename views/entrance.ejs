@@ -25,7 +25,7 @@
                 <form>
                     <div class="mb-3">
                         <h3 class="text-center mb-5">LMIT Entrance Examination (Y22A)</h3>
-                        <p>Welcome, Olamigoke Philip A.,</p>
+                        <p>Welcome</p>
                         <p class="pr-font"><b>Subject:</b> Basic Arithmetic & Logical Reasoning</p>
                         <p class="pr-font"><b>Total:</b> 20 Questions</p>
                     </div>
@@ -78,16 +78,17 @@
             </div>
 
             <!-- Step 3 -->
-            <div v-if="questionIndex >= quiz.questions.length" class="step step3 pr-font">
+            <div v-if="questionIndex >= quiz.questions.length" class="step step3 pr-font text-center">
                 <h2 class="title">
                     Result
                 </h2>
                 <span class="icon">
                     <i class="fa" :class="score()>=6?'fa-check-circle-o success':'fa-times-circle'"></i>
                 </span>
-                <!-- <p>You scored {{ (score() / 10) * 100 }}%</p>
+                <p>You scored {{ (score() / 10) * 100 }}%</p>
+                <!-- <p>
                 {{ score() >= 6 ? "Congratulations, you pass the exam. Result has been sent to your email" : "Sorry, you
-                did not meet up to the required score"}} -->
+                did not meet up to the required score"}}</p> -->
                 <br>
 
                 <button class="btn-action btn-get-started" @click="restart()">Back to Home</button>
