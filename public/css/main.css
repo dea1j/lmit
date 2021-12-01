@@ -1,6 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Comforter+Brush&display=swap"); */
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Open+Sans:wght@700&family=Poppins:wght@400;700&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+
 * {
   margin: 0px;
   padding: 0px;
@@ -23,7 +26,9 @@ body {
 }
 
 .welcome {
-  font-family: "Comforter Brush", cursive;
+  /* font-family: "Comforter Brush", cursive; */
+  /* font-family: "Architects Daughter, cursive"; */
+  font-family: "Satisfy", "cursive";
   font-size: 40px;
 }
 

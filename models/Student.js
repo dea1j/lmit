@@ -22,6 +22,13 @@ const StudentSchema = new Schema({
     },
     applicationNo: {
       type: String,
+    },
+    takenTest: {
+      type: Boolean,
+      default: false
+    },
+    score: {
+      type: String
     }
   },
   {

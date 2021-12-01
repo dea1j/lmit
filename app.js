@@ -26,20 +26,13 @@ const startServer = async () => {
     app.use(express.json());
 
     // Routes
-    app.get('/', function(req, res){ 
+    app.get('/', function(req, res){
         res.render('index');
     });
 
     app.get('/mailresponse', function(req, res){ 
         res.render('sentMail');
     });
-    
-    app.get('/proceed', function(req, res){
-        const fullName = req.query.fullName
-        const applicationNo = req.query.applicationNo
-        res.render('step3',{fullName:fullName, applicationNo: applicationNo});
-    });
-    
     
     app.post("/registerStudent", urlencodedParser, async(req, res) => {
         const data = req.body;
@@ -59,23 +52,47 @@ const startServer = async () => {
         try {
             const savedStudent = await student.save()
             res.status(201)
-            .redirect(`/proceed?fullName=${savedStudent.fullName}&email=${savedStudent.email}&applicationNo=${savedStudent.applicationNo}`)
+            .redirect(`/proceed/${savedStudent._id}`)
         } catch (error) {
             console.log(error)
             res.status(500).send(error);
         }
     });
+
+    app.get('/proceed/:id', async (req, res) => {
+        const id = req.params.id
+        const registeredStudent = await Student.findById(id)
+        res.render('step3',{fullName:registeredStudent.fullName, applicationNo: registeredStudent.applicationNo, id: registeredStudent.id});
+    });
     
-    app.get('/entranceExam', async(req, res) => {
-        res.render('entrance');
+    app.get('/entranceExam/:id', async(req, res) => {
+        let id = req.params.id;
+        
+        Student.findById(id, (err, user) => {
+            if(err) {
+                console.log(err)
+            } else {
+                if(user === null) {
+                    console.log("User not found")
+                } else {
+                    res.render('entrance', {fullName: user.fullName, applicationNo: user.applicationNo, id: user.id, testTaken: user.testTaken});
+                    console.log("dsJhb", user)
+                }
+            }
+        })
+        // const data = req.params.id;
+        // console.log({data})
+        
     });
 
     // app.use('/test', testRoutes)
 
     // Set Public Folder
-    app.use("/css",  express.static(path.join(__dirname, 'public', 'css')));
-    app.use("/js",  express.static(path.join(__dirname, 'public', 'js')));
-    app.use("/img",  express.static(path.join(__dirname, 'public', 'img')));
+    // app.use("/css",  express.static(path.join(__dirname, 'public', 'css')));
+    // app.use("/js",  express.static(path.join(__dirname, 'public', 'js')));
+    // app.use("/img",  express.static(path.join(__dirname, 'public', 'img')));
+
+    app.use(express.static(path.join(__dirname, '/public')));
 
 
   // Server
