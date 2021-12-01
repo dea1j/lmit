@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 require("dotenv").config();
 
-// const testRoutes = require('./routes/testRoute');
 const Student = require('./models/Student')
 
 app.set('view engine', 'ejs');
@@ -80,18 +79,9 @@ const startServer = async () => {
                 }
             }
         })
-        // const data = req.params.id;
-        // console.log({data})
-        
     });
 
-    // app.use('/test', testRoutes)
-
     // Set Public Folder
-    // app.use("/css",  express.static(path.join(__dirname, 'public', 'css')));
-    // app.use("/js",  express.static(path.join(__dirname, 'public', 'js')));
-    // app.use("/img",  express.static(path.join(__dirname, 'public', 'img')));
-
     app.use(express.static(path.join(__dirname, '/public')));
 
 

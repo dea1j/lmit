@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const StudentSchema = new Schema({
+    regId: {
+      type: Number,
+      unique: true,
+    },
     fullName: {
       type: String,
       required: true,
@@ -28,7 +32,8 @@ const StudentSchema = new Schema({
       default: false
     },
     score: {
-      type: String
+      type: Number,
+      default: 0
     }
   },
   {

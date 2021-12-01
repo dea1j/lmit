@@ -26,15 +26,13 @@ body {
 }
 
 .welcome {
-  /* font-family: "Comforter Brush", cursive; */
-  /* font-family: "Architects Daughter, cursive"; */
   font-family: "Satisfy", "cursive";
   font-size: 40px;
 }
 
 .btn-action {
   height: 50px;
-  width: 180px;
+  width: 150px;
   border: 0;
   color: white;
   background-color: #5872ce;
@@ -54,6 +52,7 @@ body {
   padding: 20px;
   border-radius: 15px;
   margin: 20px 0;
+  max-width: 700px;
 }
 
 .step2 > form {
@@ -102,49 +101,8 @@ body {
   font-size: 10rem;
 }
 .choiceBtn {
-  justify-content: space-between;
+  justify-content: right;
 }
-
-.questionContainer {
-  white-space: normal;
-
-  height: 100%;
-  width: 100%;
-}
-.optionContainer {
-  margin-top: 12px;
-  flex-grow: 1;
-}
-.option {
-  padding: 9px 18px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  background-color: #dddddd;
-  color: rgba(0, 0, 0, 0.85);
-  border: transparent 1px solid;
-}
-.option:active {
-  transform: scaleX(0.9);
-}
-.is-selected {
-  border-color: rgba(black, 0.25);
-  background-color: white;
-  border: 1px solid #8e8ed7;
-}
-.is-selected:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.pagination {
-  justify-content: space-between;
-}
-.questions {
-  padding: 0 30px;
-}
-.icon {
-  color: #ff5252;
-  font-size: 5rem;
-}
-.icon .success {
-  color: #00e676;
-  font-size: 5rem;
+.continueBtn {
+  margin-right: 5px;
 }
