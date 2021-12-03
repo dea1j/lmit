@@ -2,7 +2,7 @@ const handleBackBtn = () => {
   console.log("Hello")
 }
 
-
+console.log("object")
 // let quiz = {
 //   questions: [
 //     {
