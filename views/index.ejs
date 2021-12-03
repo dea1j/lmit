@@ -62,7 +62,7 @@
                 <div class="logo d-flex mt-3">
                     <img src="./img/logoMain.png" alt="logo" />
                 </div>
-                <form method="POST" action="/registerStudent">
+                <form id="form" method="POST" action="/registerStudent">
                     <h3 class="text-center mb-5">Application Form (Y22A)</h3>
                     <div class="mb-3">
                         <label class="form-label">Full Name</label>
@@ -109,13 +109,13 @@
                                 class="fal fa-long-arrow-left"></i> &nbsp; Previous</button>
                         <!-- <button class="btn btn-primary" @click='createUser()'> -->
                         <button class="btn btn-primary" type="submit">
-                          Register <i class="fal fa-user-plus"></i>
+                          Register <i class="fal fa-user-plus"> <img style="width: 30px; display: none;" id="displaySpinner" src="./img/Spinner.gif" /> </i>
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div v-else class="step step3 pr-font">
+            <!-- <div v-else class="step step3 pr-font">
                 <div class="logo d-flex mt-3">
                     <img src="./img/logoMain.png" alt="logo" />
                 </div>
@@ -140,7 +140,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -150,6 +150,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <!-- <script>
+        $('#form').submit(function () {
+                $('#displaySpinner').show();
+            });
+    </script> -->
 </body>
 
 </html>

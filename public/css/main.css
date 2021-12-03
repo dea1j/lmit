@@ -29,6 +29,9 @@ body {
   font-family: "Satisfy", "cursive";
   font-size: 40px;
 }
+.title {
+  font-size: 27px;
+}
 
 .btn-action {
   height: 50px;
@@ -105,4 +108,32 @@ body {
 }
 .continueBtn {
   margin-right: 5px;
+}
+.option {
+  display: flex;
+  flex-direction: column;
+}
+.radio {
+  cursor: pointer;
+  font-size: 18px;
+  padding: 10px;
+  background-color: #dbdbdb;
+}
+.radioSpacing {
+  margin-right: 7px;
+}
+.radio:hover {
+  background-color: #e6e6e6;
+}
+.icon {
+  font-size: 20px;
+}
+.success {
+  color: #00e676 !important;
+}
+.navig {
+  justify-content: space-between;
+}
+.red {
+  color: #ec4545;
 }

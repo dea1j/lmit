@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Registration</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+	<link rel="stylesheet" href="/css/main.css" />
+	<link rel="stylesheet" href="/css/entrance.css" />
+	<!--Font Awesome-->
+	<link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet" />
+	<script src="https://kit.fontawesome.com/a26d0abb0a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div id="app">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 score">
+						<h2 class="text-center">Your Score Card</h2>
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>Total Questions</th>
+									<th>Your Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="success">
+									<td>
+										<%= total %>
+									</td>
+									<td>
+										<%= score %>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<a href="/" class="btn btn-warning pull-left">Play Again</a>
+					</div>
+			
+				</div>
+			</div>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	<!-- <script src="/js/main.js"></script> -->
+	<script src="/js/entrance.js" type="module"></script>
+	<script src="https://kit.fontawesome.com/c8c9028de4.js" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+
+
+

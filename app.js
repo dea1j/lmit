@@ -3,14 +3,19 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
+const short = require('short-uuid');
+
+// Route Files
+const quizRoutes = require('./routes/quiz-routes')
+
 require("dotenv").config();
 
 const Student = require('./models/Student')
 
 app.set('view engine', 'ejs');
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
+// const urlencodedParser = bodyParser.urlencoded({ extended: false });
+app.use(bodyParser.urlencoded({extended:true}));
 
 const startServer = async () => {
   await mongoose
@@ -33,11 +38,11 @@ const startServer = async () => {
         res.render('sentMail');
     });
     
-    app.post("/registerStudent", urlencodedParser, async(req, res) => {
+    app.post("/registerStudent", async(req, res) => {
         const data = req.body;
-        function getRandomInt(max) {
-            return Math.floor(Math.random() * max);
-        }
+        // function getRandomInt(max) {
+        //     return Math.floor(Math.random() * max);
+        // }
         
         const student = new Student({
             fullName: data.fullName,
@@ -45,7 +50,8 @@ const startServer = async () => {
             phone: data.phone,
             gender: data.gender,
             qualification: data.qualification,
-            applicationNo: `Y22A${getRandomInt(500)}`
+            // applicationNo: `Y22A${getRandomInt(500)}`
+            applicationNo: `Y22A${short.generate()}`
         });
         
         try {
@@ -74,12 +80,13 @@ const startServer = async () => {
                 if(user === null) {
                     console.log("User not found")
                 } else {
-                    res.render('entrance', {fullName: user.fullName, applicationNo: user.applicationNo, id: user.id, testTaken: user.testTaken});
-                    console.log("dsJhb", user)
+                    res.render('entrance', {fullName: user.fullName, applicationNo: user.applicationNo, id: user.id, testTaken: user.takenTest});
                 }
             }
         })
     });
+
+    app.use('/quiz',quizRoutes);
 
     // Set Public Folder
     app.use(express.static(path.join(__dirname, '/public')));
