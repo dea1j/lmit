@@ -51,13 +51,15 @@
 
 							<footer class="questionFooter">
 								<nav class="pagination navig mt-3" role="navigation" aria-label="pagination">
-									<% if(questionIndex > 1){ %>
-											<button type="button" class="btn-action btn-get-started" onclick="handleBackBtn()">Back</button>
-										<!-- <button type="button" class="btn-action btn-get-started" >Back</button> -->
-									<% } %>
+									
 									<button type="submit" class="btn-action btn-get-started" >Next</button>
 								</nav>
 							</footer>
+						</form>
+						<form method="post" action="/quiz/back/<%=id%>">
+							<% if(questionIndex> 1){ %>
+								<button type="button" class="btn-action btn-get-started">Back</button>
+							<% } %>
 						</form>
 					</div>
 				</div>
@@ -72,7 +74,8 @@
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous">
 	</script>
-	<script src="/js/entrance.js" type="module"></script>
+	<!-- <script src="/js/entrance.js" type="module"></script> -->
+	<script src="/js/main.js"></script>
 </body>
 
 </html>

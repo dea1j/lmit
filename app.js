@@ -4,6 +4,9 @@ const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const short = require('short-uuid');
+const sgMail = require('@sendgrid/mail')
+// const toastr = require('express-toastr');
+// app.use(toastr());
 
 // Route Files
 const quizRoutes = require('./routes/quiz-routes')
@@ -68,6 +71,35 @@ const startServer = async () => {
         const id = req.params.id
         const registeredStudent = await Student.findById(id)
         res.render('step3',{fullName:registeredStudent.fullName, applicationNo: registeredStudent.applicationNo, id: registeredStudent.id});
+    });
+
+    // SEND MAIL & RESPONSE
+    app.get('/mailresponse/:id', async (req, res) => {
+        const id = req.params.id
+        const registeredStudent = await Student.findById(id)
+        
+        
+        // Mail Sender
+        let link = `localhost:3000/entranceExam/${id}` 
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        const msg = {
+            to: `${registeredStudent.email}`,
+            from: 'jdayo2017@gmail.com',
+            subject: 'LMIT Application',
+            // text: `Dear, fullName, Your application Number is: ${registeredStudent.applicationNo}. Click the link to take test "localhost:3000/entranceExam/${id}"`,
+            html: ` <h3>Dear ${registeredStudent.fullName},</h3>
+            <p>Your application Number is: <strong>${registeredStudent.applicationNo}</strong>. Visit the link to take test ${link}</p>
+            <p>Good luck.</p>`,
+        };
+        sgMail
+            .send(msg)
+            .then(() => {
+                console.log('Email sent')
+                res.render('sentMail',{ fullName:registeredStudent.fullName, email: registeredStudent.email, applicationNo: registeredStudent.applicationNo, id: registeredStudent.id });
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     });
     
     app.get('/entranceExam/:id', async(req, res) => {
