@@ -5,8 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
 const short = require('short-uuid');
 const sgMail = require('@sendgrid/mail')
-// const toastr = require('express-toastr');
-// app.use(toastr());
 
 // Route Files
 const quizRoutes = require('./routes/quiz-routes')
@@ -18,6 +16,9 @@ const Student = require('./models/Student')
 app.set('view engine', 'ejs');
 
 // const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+// NON-ROUTE MIDDLEWARE
+app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 const startServer = async () => {
@@ -28,9 +29,6 @@ const startServer = async () => {
     })
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log(err));
-
-    // NON-ROUTE MIDDLEWARE
-    app.use(express.json());
 
     // Routes
     app.get('/', function(req, res){
@@ -43,24 +41,28 @@ const startServer = async () => {
     
     app.post("/registerStudent", async(req, res) => {
         const data = req.body;
-        // function getRandomInt(max) {
-        //     return Math.floor(Math.random() * max);
-        // }
         
         const student = new Student({
             fullName: data.fullName,
+            gender: data.gender,
             email: data.email,
             phone: data.phone,
-            gender: data.gender,
             qualification: data.qualification,
-            // applicationNo: `Y22A${getRandomInt(500)}`
             applicationNo: `Y22A${short.generate()}`
         });
         
         try {
             const savedStudent = await student.save()
-            res.status(201)
-            .redirect(`/proceed/${savedStudent._id}`)
+            res.redirect(`/proceed/${savedStudent._id}`)
+            // (err) => {
+            //     if(err) {
+            //         console.log("The error is", err)
+            //         res.json({message: console.err})
+            //     } else {
+            //         res.redirect(`/proceed/${savedStudent._id}`)
+            //         console.log("object")
+            //     }
+            // })
         } catch (error) {
             console.log(error)
             res.status(500).send(error);
