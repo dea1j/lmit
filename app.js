@@ -44,8 +44,9 @@ const startServer = async () => {
     app.post("/registerStudent", async(req, res) => {
         const data = req.body;
         console.log(data)
-        const existingStudent = Student.findOne(data.email)
-        if(!existingStudent) {
+        const existingStudent = await Student.findOne({email: data.email})
+        
+        if(existingStudent) {
             res.json("Student account already exist")
         } else {
             const student = new Student({
