@@ -45,7 +45,7 @@ const startServer = async () => {
         const data = req.body;
         console.log(data)
         const existingStudent = Student.findOne(data.email)
-        if(existingStudent) {
+        if(!existingStudent) {
             res.json("Student account already exist")
         } else {
             const student = new Student({

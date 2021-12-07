@@ -37,11 +37,3 @@ var app = new Vue({
     },
   },
 }).$mount("#app");
-
-// const handleBackBtn = (id)=> {
-//   let url = `http:localhost:3000/quiz/back/${id}`
-//   console.log(url)
-//   fetch(url)
-//   .then(response => response.json())
-//   .then(data => console.log(data));
-// }
