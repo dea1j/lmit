@@ -27,7 +27,8 @@ body {
 
 .welcome {
   font-family: "Satisfy", "cursive";
-  font-size: 40px;
+  font-size: 38px;
+  text-align: left;
 }
 .title {
   font-size: 27px;
@@ -55,12 +56,16 @@ body {
   padding: 20px;
   border-radius: 15px;
   margin: 20px 0;
-  max-width: 700px;
+  /* max-width: 700px; */
+  width: 700px;
 }
 
 .step2 > form {
   margin: auto;
   font-family: "Open Sans", sans-serif;
+}
+.step2 {
+  width: 350px;
 }
 
 .pr-font {
@@ -136,4 +141,15 @@ body {
 }
 .red {
   color: #ec4545;
+}
+
+@media only screen and (max-width: 580px) {
+  .step {
+    width: 510px;
+  }
+}
+@media only screen and (max-width: 430px) {
+  .step {
+    width: 350px;
+  }
 }

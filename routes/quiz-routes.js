@@ -13,7 +13,7 @@ routerQuiz.get('/:id', questionController.getQuestions);
 routerQuiz.post('/next/:id', questionController.nextQuestion);
 
 // Quiz API Routes (/quiz/back)
-routerQuiz.post('/back/:id', questionController.backButton);
+routerQuiz.get('/back/:id', questionController.backButton);
 
 // Export this Module
 module.exports = routerQuiz;

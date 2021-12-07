@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "firebase": "^9.5.0",
     "mongoose": "^6.0.13",
+    "short-unique-id": "^4.4.4",
     "short-uuid": "^4.2.0",
     "toastr": "^2.1.4"
   },

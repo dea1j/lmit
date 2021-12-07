@@ -3,7 +3,8 @@ const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-const short = require('short-uuid');
+const ShortUniqueId = require('short-unique-id');
+const uid = new ShortUniqueId({ length: 4 });
 const sgMail = require('@sendgrid/mail')
 
 // Route Files
@@ -39,36 +40,55 @@ const startServer = async () => {
         res.render('sentMail');
     });
     
+    // REGISTER STUDENT
     app.post("/registerStudent", async(req, res) => {
         const data = req.body;
-        
+        console.log(data)
+
         const student = new Student({
             fullName: data.fullName,
             gender: data.gender,
             email: data.email,
             phone: data.phone,
             qualification: data.qualification,
-            applicationNo: `Y22A${short.generate()}`
+            applicationNo: `Y22A${uid().toUpperCase()}`
         });
         
         try {
             const savedStudent = await student.save()
-            res.redirect(`/proceed/${savedStudent._id}`)
-            // (err) => {
-            //     if(err) {
-            //         console.log("The error is", err)
-            //         res.json({message: console.err})
-            //     } else {
-            //         res.redirect(`/proceed/${savedStudent._id}`)
-            //         console.log("object")
-            //     }
-            // })
+
+            // SEND MAIL & RESPONSE   
+                let link = `http://localhost:3000/entranceExam/${savedStudent.id}` 
+                sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+                const msg = {
+                    to: `${savedStudent.email}`,
+                    from: 'jdayo2017@gmail.com',
+                    subject: 'LMIT Application',
+                    "dynamic_template_data": {
+                      "fullName": `${savedStudent.fullName}`,
+                      "applicationNo": `${savedStudent.applicationNo}`,
+                      "link": `${link}`
+                    },
+                    "template_id":"d-8d4e865441ee4c92ad74f4fd8ad82cdc",
+                };
+                sgMail
+                    .send(msg)
+                    .then(() => {
+                        console.log('Email sent')
+                        res.redirect(`/proceed/${savedStudent._id}`)
+                    })
+                    .catch((error) => {
+                        console.error(error)
+                    })
+        
+
         } catch (error) {
             console.log(error)
             res.status(500).send(error);
         }
     });
 
+    
     app.get('/proceed/:id', async (req, res) => {
         const id = req.params.id
         const registeredStudent = await Student.findById(id)
@@ -82,17 +102,19 @@ const startServer = async () => {
         
         
         // Mail Sender
-        let link = `localhost:3000/entranceExam/${id}` 
+        let link = `http://localhost:3000/entranceExam/${id}` 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
         const msg = {
-            to: `${registeredStudent.email}`,
-            from: 'jdayo2017@gmail.com',
-            subject: 'LMIT Application',
-            // text: `Dear, fullName, Your application Number is: ${registeredStudent.applicationNo}. Click the link to take test "localhost:3000/entranceExam/${id}"`,
-            html: ` <h3>Dear ${registeredStudent.fullName},</h3>
-            <p>Your application Number is: <strong>${registeredStudent.applicationNo}</strong>. Visit the link to take test ${link}</p>
-            <p>Good luck.</p>`,
-        };
+                    to: `${registeredStudent.email}`,
+                    from: 'jdayo2017@gmail.com',
+                    subject: 'LMIT Application test',
+                    "dynamic_template_data": {
+                      "fullName": `${registeredStudent.fullName}`,
+                      "applicationNo": `${registeredStudent.applicationNo}`,
+                      "link": `${link}`
+                    },
+                    "template_id":"d-8d4e865441ee4c92ad74f4fd8ad82cdc",
+                };
         sgMail
             .send(msg)
             .then(() => {
