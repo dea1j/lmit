@@ -58,7 +58,7 @@ const startServer = async () => {
             const savedStudent = await student.save()
 
             // SEND MAIL & RESPONSE   
-                let link = `http://localhost:3000/entranceExam/${savedStudent.id}` 
+                let link = `${process.env.EMAIL_BASE_URL}/entranceExam/${savedStudent.id}` 
                 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
                 const msg = {
                     to: `${savedStudent.email}`,
@@ -102,7 +102,7 @@ const startServer = async () => {
         
         
         // Mail Sender
-        let link = `http://localhost:3000/entranceExam/${id}` 
+        let link = `${process.env.EMAIL_BASE_URL}/entranceExam/${id}` 
         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
         const msg = {
                     to: `${registeredStudent.email}`,
