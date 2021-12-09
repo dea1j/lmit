@@ -6,6 +6,9 @@ const bodyParser = require('body-parser')
 const ShortUniqueId = require('short-unique-id');
 const uid = new ShortUniqueId({ length: 4 });
 const sgMail = require('@sendgrid/mail')
+const { flash } = require('express-flash-message');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 
 // Route Files
 const quizRoutes = require('./routes/quiz-routes')
@@ -14,13 +17,14 @@ require("dotenv").config();
 
 const Student = require('./models/Student')
 
-app.set('view engine', 'ejs');
-
 // const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 // NON-ROUTE MIDDLEWARE
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}));
+
+app.set('view engine', 'ejs');
+
 
 const startServer = async () => {
   await mongoose
@@ -39,6 +43,10 @@ const startServer = async () => {
     app.get('/mailresponse', function(req, res){ 
         res.render('sentMail');
     });
+
+    app.get('/register', function(req, res) {
+        res.render('register')
+    })
     
     // REGISTER STUDENT
     app.post("/registerStudent", async(req, res) => {
@@ -47,7 +55,8 @@ const startServer = async () => {
         const existingStudent = await Student.findOne({email: data.email})
         
         if(existingStudent) {
-            res.json("Student account already exist")
+            console.log("Student account already exist")
+            // res.json("Student account already exist")
         } else {
             const student = new Student({
                 fullName: data.fullName,
@@ -71,30 +80,29 @@ const startServer = async () => {
                         "dynamic_template_data": {
                           "fullName": `${savedStudent.fullName}`,
                           "applicationNo": `${savedStudent.applicationNo}`,
-                          "link": `${link}`
+                          "link": `${link}`,
+                        "subject": 'LMIT Registration',
                         },
                         "template_id":"d-8d4e865441ee4c92ad74f4fd8ad82cdc",
                     };
                     sgMail
                         .send(msg)
                         .then(() => {
+                            // app.use(flash({ sessionKeyName: 'Email Sent' }));
                             console.log('Email sent')
                             res.redirect(`/proceed/${savedStudent._id}`)
                         })
                         .catch((error) => {
                             console.error(error)
                         })
-            
 
             } catch (error) {
                 console.log(error)
                 res.status(500).send(error);
             }
-            }
-
+        }
     });
 
-    
     app.get('/proceed/:id', async (req, res) => {
         const id = req.params.id
         const registeredStudent = await Student.findById(id)
@@ -103,33 +111,34 @@ const startServer = async () => {
 
     // SEND MAIL & RESPONSE
     app.get('/mailresponse/:id', async (req, res) => {
-        const id = req.params.id
-        const registeredStudent = await Student.findById(id)
+        res.render('sentMail')
+        // const id = req.params.id
+        // const registeredStudent = await Student.findById(id)
         
         
         // Mail Sender
-        let link = `${process.env.EMAIL_BASE_URL}/entranceExam/${id}` 
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-        const msg = {
-                    to: `${registeredStudent.email}`,
-                    from: 'jdayo2017@gmail.com',
-                    subject: 'LMIT Application test',
-                    "dynamic_template_data": {
-                      "fullName": `${registeredStudent.fullName}`,
-                      "applicationNo": `${registeredStudent.applicationNo}`,
-                      "link": `${link}`
-                    },
-                    "template_id":"d-8d4e865441ee4c92ad74f4fd8ad82cdc",
-                };
-        sgMail
-            .send(msg)
-            .then(() => {
-                console.log('Email sent')
-                res.render('sentMail',{ fullName:registeredStudent.fullName, email: registeredStudent.email, applicationNo: registeredStudent.applicationNo, id: registeredStudent.id });
-            })
-            .catch((error) => {
-                console.error(error)
-            })
+//         let link = `${process.env.EMAIL_BASE_URL}/entranceExam/${id}` 
+//         sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+//         const msg = {
+//                     to: `${registeredStudent.email}`,
+//                     from: 'jdayo2017@gmail.com',
+//                     subject: 'LMIT Application test',
+//                     "dynamic_template_data": {
+//                       "fullName": `${registeredStudent.fullName}`,
+//                       "applicationNo": `${registeredStudent.applicationNo}`,
+//                       "link": `${link}`
+//                     },
+//                     "template_id":"d-8d4e865441ee4c92ad74f4fd8ad82cdc",
+//                 };
+//         sgMail
+//             .send(msg)
+//             .then(() => {
+//                 console.log('Email sent')
+//                 res.render('sentMail',{ fullName:registeredStudent.fullName, email: registeredStudent.email, applicationNo: registeredStudent.applicationNo, id: registeredStudent.id });
+//             })
+//             .catch((error) => {
+//                 console.error(error)
+//             })
     });
     
     app.get('/entranceExam/:id', async(req, res) => {

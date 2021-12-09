@@ -1,19 +1,14 @@
-// Dependencies
 const express = require('express');
 const routerQuiz = express.Router();
-
-//controller
 const questionController = require('../controllers/questionController')
 
-
-// Quiz API Routes (/quiz)
+// Quiz API Route (/quiz)
 routerQuiz.get('/:id', questionController.getQuestions);
 
-// Quiz API Routes (/quiz/next)
+// Quiz API Route (/quiz/next)
 routerQuiz.post('/next/:id', questionController.nextQuestion);
 
-// Quiz API Routes (/quiz/back)
+// Quiz API Route (/quiz/back)
 routerQuiz.get('/back/:id', questionController.backButton);
 
-// Export this Module
 module.exports = routerQuiz;

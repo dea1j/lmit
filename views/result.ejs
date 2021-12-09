@@ -20,32 +20,105 @@
         <div class="container">
             <!-- Step 3 -->
             <div class="step step3 pr-font text-center">
-                <div class="logo d-flex mt-3">
+                <div class="logo d-flex">
                     <img src="/img/logoMain.png" alt="logo" />
                 </div>
                 <h2 class="title">
                     Result
                 </h2>
                 <span class="icon">
-                    
+
                 </span>
-                <p>You got <%= score %> of <%= total %> questions</p>
-                    <% if( score> 2){ %>
+                <p>You got <%= (score / 4) * 100 %>% of the questions</p>
+                    <% if( score > 2){ %>
                         <i class="fa fa-check-circle-o icon success"></i>
-                        <h1>Passed</h1>
+                        <h3>Passed</h3>
                         <form action="/">
-                            <button type="submit" class="btn-action btn-get-started">Back to Home</button>
+                            <p class="align-left">
+                                Congratulations <%= fullName %>,
+                                
+                                You scored above the 65% mark required to join our training programme. Thank you for taking interest in LMIT session
+                                Y22A.
+                                <br>
+                                We look forward to seeing you in school.
+                                <br>
+                                Below is the breakdown of the Training programme:
+                                <table class="table table-striped">
+                                    <tbody class="align-left">
+                                        <tr>
+                                            <th>Course</th>
+                                            <td>Diploma in Software Engineering</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Session Starts</th>
+                                            <td>January 15th</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Duration of programme</th>
+                                            <td>1 year</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Mode of Training</th>
+                                            <td>Physical</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Campus</th>
+                                            <td>Yaba, Lagos</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lecture days</th>
+                                            <td>Saturday (10am - 2pm), Sunday (1pm to 5pm)</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Syllabus</th>
+                                            <td><a href="">Click here to view</a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <b class="text-left"><ul>Tution Fee</ul></b>
+                                <table class="table table-striped">
+                                    <tbody class="align-left">
+                                        <tr>
+                                            <th>First Installment</th>
+                                            <td>₦100,000</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Second Installment</th>
+                                            <td>₦85,000</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Third Installment</th>
+                                            <td>₦85,000</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Total Tution Fee</th>
+                                            <td>₦270,000</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <button type="button" class="btn-action btn-get-started" onclick="window.print()"> Print Result </button>
+                                <button type="button" class="btn-action btn-get-started"> Pay Tution Fee </button>
+                            </p>
                         </form>
                     <% } %>
                     <% if (score < 2){ %>
-                        <i class="fa fa-times-circle icon"></i>
-                        <h1 style="font-size: 25px; margin-top: 5px;">Sorry, you did not meet the required score</h1>
-                        <form action="/">
+                        <i class="fa fa-times-circle icon"></i><h3>Sorry!</h3>
+                        <!-- <h1 style="font-size: 25px; margin-top: 5px;">Sorry, you did not meet the required score</h1> -->
+                        <form>
+                            <p class="align-left">
+                                Dear <%= fullName %>,
+                                <br>
+                                Thank you for taking interest in LMIT session Y22A. However, you have met up to the specified point: 65% required to
+                                fully participate in this upcoming session.
+                                <br>
+                                We encourage you to take the test again towards the next semester starting on July 31st. To prep ahead, below are the
+                                resources recommend. Thank you.
+                            </p>
                             <button type="submit" class="btn-action btn-get-started" >Back to Home</button>
                         </form>
                     <% } %>
                 <br>
-
                 <!-- <button class="btn-action btn-get-started" @click="restart()">Back to Home</button> -->
             </div>
 
@@ -58,7 +131,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

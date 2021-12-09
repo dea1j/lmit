@@ -1,5 +1,4 @@
-const questionsModel = require('../models/questions');
-const databaseQuestions = require('../sample_databse _files/questions.json')
+const databaseQuestions = require('../sample_quiz_file/questions.json')
 
 const Student = require('../models/Student')
 
@@ -65,9 +64,7 @@ module.exports = {
 						}
 					}
 				})
-				
-				res.render('result',{score:score,total:questions.length})
-
+				res.render('result',{fullName: user.fullName, score:score, total:questions.length})
 			}
 		}
 	  })
@@ -83,15 +80,14 @@ module.exports = {
 			}
 			if(i < questions.length){
 				res.render('quiz',{question:questions[i].question, options:questions[i].options, total:questions.length, questionIndex: i +1, id:ID});
-
 			} else {
 				i=0;
 				var score = 0;
 				for(let j = 0 ; j < questions.length; j++) {
-						if(questions[j].answer == answers[j])
-						{
+					if(questions[j].answer == answers[j])
+					{
 						score = score + 1;
-						}
+					}
 				}
 			}
 		} 

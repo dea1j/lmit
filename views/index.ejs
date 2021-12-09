@@ -20,7 +20,7 @@
                 <div class="logo d-flex mt-3">
                     <img src="./img/logoMain.png" alt="logo" />
                 </div>
-                <form>
+                <form method="get" action="/register">
                     <div class="mb-3">
                         <h3 class="welcome">Welcome, Prospective Students.</h3>
                         <p class="pr-font">We are genueinely happy you're here.</p>
@@ -50,65 +50,8 @@
                         </div>
                     </div>
                     <div class="d-flex flex-row w-100 justify-content-end">
-                        <button :disabled="!readTermsAndCondition" type="button" v-on:click="nextStep()"
-                            class="btn-action btn-get-started">
+                        <button :disabled="!readTermsAndCondition" type="submit" class="btn-action btn-get-started">
                             Continue &nbsp; <i class="fal fa-long-arrow-right fa-lg"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <div v-else-if="step == '2'" class="step step2">
-                <div class="logo d-flex mt-3">
-                    <img src="./img/logoMain.png" alt="logo" />
-                </div>
-                <form id="form" method="POST" action="/registerStudent">
-                    <h3 class="text-center mb-5">Application Form (Y22A)</h3>
-                    <div class="mb-3">
-                        <label class="form-label">Full Name</label>
-                        <input v-model="fullName" name="fullName" type="text" class="form-control" required />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Sex</label>
-                        <select v-model="gender" name="gender" type="text" class="form-control">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Email address</label>
-                        <input required v-model="email" name="email" type="email" class="form-control" placeholder="" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Phone</label>
-                        <input required v-model="phone" name="phone" type="phone" class="form-control"
-                            placeholder="e.g 08012345678" />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Recent Qualification</label>
-                        <select required v-model="qualification" name="qualification" class="form-control">
-                            <option value="">
-                                --- Select---
-                            </option>
-                            <option value="ssce">SSCE</option>
-                            <option value="nce-nd">NCE/ND</option>
-                            <option value="bsc-hnd">BSc/HND</option>
-                            <option value="msc-phd">MSc/PhD</option>
-                            <option value="others">Others</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <b>Next Session Starts: 8th January, 2022</b>
-                        <br />
-
-                    </div>
-
-                    <div class="pt-3 d-flex justify-content-between">
-                        <button type="submit" v-on:click.prevent="prevStep()" class="btn btn-warning">
-                            <i class="fal fa-long-arrow-left"></i> &nbsp; Previous</button>
-                        <button class="btn btn-primary" type="submit">
-                          Register <i class="fal fa-user-plus"> </i>
                         </button>
                     </div>
                 </form>

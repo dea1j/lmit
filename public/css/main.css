@@ -60,13 +60,13 @@ body {
   width: 700px;
 }
 
-.step2 > form {
+/* .step2 > form {
   margin: auto;
   font-family: "Open Sans", sans-serif;
 }
 .step2 {
   width: 350px;
-}
+} */
 
 .pr-font {
   font-family: "Open Sans", sans-serif;
@@ -141,6 +141,9 @@ body {
 }
 .red {
   color: #ec4545;
+}
+.align-left {
+  text-align: left;
 }
 
 @media only screen and (max-width: 580px) {
